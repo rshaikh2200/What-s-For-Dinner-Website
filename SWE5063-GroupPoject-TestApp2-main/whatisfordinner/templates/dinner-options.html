@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Dinner Options for {{ user.username }} - Family: {{ user.family.name }}</h2>
+
+<div class="container mt-4">
+  <div class="white-box shadow-sm p-4 mb-4">
+    <div class="table-container">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Entry Type</th>
+            <th>Cuisine Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for option in dinner_options %}
+          <tr>
+            <td>{{ option.name }}</td>
+            <td>{{ option.entry_type }}</td>
+            <td>{{ option.cuisine_type }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="white-box shadow-sm p-4">
+    <h3>Add/Edit Dinner Option</h3>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn custom-btn">Submit</button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .white-box {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .btn.custom-btn {
+    background-color: #f28d8d;
+    border-color: #f28d8d;
+    color: white;
+  }
+
+  .btn.custom-btn:hover {
+    background-color: #d97676;
+    border-color: #d97676;
+  }
+
+  h2, h3 {
+    text-align: center;
+  }
+</style>
+
+{% endblock %}
+

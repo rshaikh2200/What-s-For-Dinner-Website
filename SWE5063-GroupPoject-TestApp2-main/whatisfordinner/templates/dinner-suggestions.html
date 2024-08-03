@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h2>Log Your Dinner Suggestion</h2>
+
+<div class="container mt-4">
+  {% if message %}
+  <div class="white-box shadow-sm p-4 mb-4">
+    <p>{{ message }}</p>
+    <p>{{ users_dinner_suggestions_message }}</p>
+  </div>
+  {% else %}
+  <div class="white-box shadow-sm p-4 mb-4">
+    <p>What is your dinner suggestion for {{ current_date }}?</p>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn custom-btn">Submit</button>
+    </form>
+  </div>
+  {% endif %}
+</div>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .white-box {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .btn.custom-btn {
+    background-color: #f28d8d;
+    border-color: #f28d8d;
+    color: white;
+  }
+
+  .btn.custom-btn:hover {
+    background-color: #d97676;
+    border-color: #d97676;
+  }
+
+  h2 {
+    text-align: center;
+  }
+</style>
+
+{% endblock %}
